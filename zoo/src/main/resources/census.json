@@ -1,0 +1,222 @@
+{
+  "features": {
+    "wideBaseCols": [
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "education",
+        "vocabulary": [
+          "Bachelors",
+          "HS-grad",
+          "11th",
+          "Masters",
+          "9th",
+          "Some-college",
+          "Assoc-acdm",
+          "Assoc-voc",
+          "7th-8th",
+          "Doctorate",
+          "Prof-school",
+          "5th-6th",
+          "10th",
+          "1st-4th",
+          "Preschool",
+          "12th"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "maritalStatus",
+        "vocabulary": [
+          "Married-civ-spouse",
+          "Divorced",
+          "Married-spouse-absent",
+          "Never-married",
+          "Separated",
+          "Married-AF-spouse",
+          "Widowed"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "relationship",
+        "vocabulary": [
+          "Husband",
+          "Not-in-family",
+          "Wife",
+          "Own-child",
+          "Unmarried",
+          "Other-relative"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "workclass",
+        "vocabulary": [
+          "Self-emp-not-inc",
+          "Private",
+          "State-gov",
+          "Federal-gov",
+          "Local-gov",
+          "?",
+          "Self-emp-inc",
+          "Without-pay",
+          "Never-worked"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.BucketString",
+        "name": "occupation",
+        "bucketSize": 1000
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.BucketNumeric",
+        "name": "age",
+        "ranges": [
+          18.0,
+          25.0,
+          30.0,
+          35.0,
+          40.0,
+          45.0,
+          50.0,
+          55.0,
+          60.0,
+          65.0
+        ]
+      }
+    ],
+    "wideCrossCols": [
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.CrossBucket",
+        "names": [
+          "education",
+          "occupation"
+        ],
+        "bucketSize": 1000
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.CrossBucket",
+        "names": [
+          "age",
+          "education",
+          "occupation"
+        ],
+        "bucketSize": 1000
+      }
+    ],
+    "indicatorCols": [
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "education",
+        "vocabulary": [
+          "Bachelors",
+          "HS-grad",
+          "11th",
+          "Masters",
+          "9th",
+          "Some-college",
+          "Assoc-acdm",
+          "Assoc-voc",
+          "7th-8th",
+          "Doctorate",
+          "Prof-school",
+          "5th-6th",
+          "10th",
+          "1st-4th",
+          "Preschool",
+          "12th"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "maritalStatus",
+        "vocabulary": [
+          "Married-civ-spouse",
+          "Divorced",
+          "Married-spouse-absent",
+          "Never-married",
+          "Separated",
+          "Married-AF-spouse",
+          "Widowed"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "relationship",
+        "vocabulary": [
+          "Husband",
+          "Not-in-family",
+          "Wife",
+          "Own-child",
+          "Unmarried",
+          "Other-relative"
+        ]
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Categorical",
+        "name": "workclass",
+        "vocabulary": [
+          "Self-emp-not-inc",
+          "Private",
+          "State-gov",
+          "Federal-gov",
+          "Local-gov",
+          "?",
+          "Self-emp-inc",
+          "Without-pay",
+          "Never-worked"
+        ]
+      }
+    ],
+    "embedCols": [
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.BucketString",
+        "name": "occupation",
+        "bucketSize": 1000,
+        "embedOutDim": 10
+      }
+    ],
+    "continuousCols": [
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Continuous",
+        "name": "age"
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Continuous",
+        "name": "educationNum"
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Continuous",
+        "name": "capitalGain"
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Continuous",
+        "name": "capitalLoss"
+      },
+      {
+        "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Continuous",
+        "name": "hoursPerWeek"
+      }
+    ],
+    "label": {
+      "jsonClass": "com.intel.analytics.zoo.cli.recommendation.features.Label",
+      "name": "label",
+      "classMapping": {
+        "<=50K": 1,
+        ">50K": 2
+      }
+    }
+  },
+  "trainingParameters":{
+    "batchSize": 2048,
+    "maxEpoch": 10
+  },
+  "modelParams":{
+    "jsonClass" : "com.intel.analytics.zoo.cli.recommendation.modelstore.WideAndDeepParams",
+    "modelType": "wide_n_deep",
+    "numClasses": 2,
+    "hiddenLayer": [100, 75, 50, 25],
+    "inputDir": "/Users/alfonso.sastre/IdeaProjects/wide_n_deep/wideAndDeep/src/main/resources/data/census/adult_train.csv",
+    "logDir": "/tmp/census-log"
+  }
+}
